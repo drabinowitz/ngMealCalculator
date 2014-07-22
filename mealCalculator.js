@@ -16,33 +16,7 @@ angular.module('mealCalculator',[])
 
 			$scope.submitted = false;
 
-			$scope.inputs=[
-
-				{
-				
-					label:"Base Meal Price: $",
-					name:"basePrice",
-					type:"number"
-
-				},
-
-				{
-		
-					label:"Tax Rate: %",
-					name:"taxRate",
-					type:"number"
-
-				},
-
-				{
-				
-					label:"Tip Percentage: %",
-					name:"tipPercentage",
-					type:"number"
-
-				}
-
-			]
+			$rootScope.inputs={};
 
 		};
 
@@ -50,7 +24,7 @@ angular.module('mealCalculator',[])
 
 		$scope.$on('reset',function(){
 
-			init();
+			$scope.init();
 
 		});
 
@@ -71,44 +45,5 @@ angular.module('mealCalculator',[])
 			}
 
 		};
-
-	})
-
-	.controller('ccCtrl',function($scope){
-
-		var init = function(){
-
-			$scope.subTotals = [
-
-				{
-
-					name:"Subtotal",
-					value:0.00
-
-				},
-
-				{
-
-					name:"Tip",
-					value:0.00
-
-				},
-
-				{
-
-					name:"Total",
-					value:0.00
-
-				},
-
-			]
-
-		};
-
-		$scope.$on('reset',function(){
-
-			init();
-
-		});
 
 	});

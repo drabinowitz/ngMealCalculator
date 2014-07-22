@@ -24,14 +24,18 @@
 					<h3 class="mdTitle">Enter the Meal Details</h3>
 
 					<form name="mdForm" novalidate ng-submit="submit()">
-
-						<div class="input" ng-repeat="input in inputs">
 							
-							<label for="{{ input.name }}">{{ input.label }}</label>
+						<label for="basePrice">Base Meal Price: $</label>
 
-							<input name="{{ input.name }}" type="{{ input.type }}" ng-model="input.value" ng-required="true">
+						<input name="basePrice" type="number" ng-model="inputs.basePrice" ng-required="true">
 
-						</div>
+						<label for="taxRate">Tax Rate: %</label>
+
+						<input name="taxRate" type="number" ng-model="inputs.taxRate" ng-required="true">
+						
+						<label for="tipPercentage">Tip Percentage: %</label>
+
+						<input name="tipPercentage" type="number" ng-model="inputs.tipPercentage" ng-required="true">
 
 						<input class="mdSubmit" type="submit" name="submit" value="Submit">
 
@@ -51,7 +55,11 @@
 					
 					<h3>Customer Charges</h3>
 
-					<p ng-repeat="subTotal in subTotals">{{ subTotal.name + " " + subTotal.value }}</p>
+					<p>SubTotal: {{ ( inputs.basePrice + inputs.basePrice * inputs.taxRate / 100 ) || 0 | currency }}</p>
+
+					<p>Tip: {{ ( inputs.basePrice * inputs.tipPercentage / 100 ) || 0 | currency }}</p>
+
+					<p>Total: {{ ( inputs.basePrice + inputs.basePrice * inputs.taxRate / 100 + inputs.basePrice * inputs.tipPercentage / 100 ) || 0 | currency }}</p>
 
 				</section>
 
