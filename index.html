@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Waitstaff Calculator</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="mealCalculator.css">
+
+</head>
+<body>
+
+	<div class="container" ng-app="mealCalculator" ng-controller="rootCtrl">
+
+		<h1 class="title">WaitStaff Calculator</h1>
+
+		<div class="row moduleWrapper">
+				
+			<div class="col-md-6 mealDetailsWrapper">
+
+				<section class="mealDetails" ng-controller="mdCtrl">
+					
+					<h3 class="mdTitle">Enter the Meal Details</h3>
+
+					<div class="input" ng-repeat="input in inputs">
+						
+						<label for="{{ input.name }}">{{ input.label }}</label>
+
+						<input name="{{ input.name }}" type="{{ input.type }}">
+
+					</div>
+
+				</section>
+				
+			</div>
+
+			<div class="col-md-5 col-md-offset-1 resultsWrapper">
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<button ng-click="reset()">Reset</button>
+
+		</div>
+
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+	<script src="mealCalculator.js"></script>
+
+</body>
+</html>
