@@ -23,19 +23,37 @@
 					
 					<h3 class="mdTitle">Enter the Meal Details</h3>
 
-					<div class="input" ng-repeat="input in inputs">
-						
-						<label for="{{ input.name }}">{{ input.label }}</label>
+					<form name="mdForm" novalidate ng-submit="submit()">
 
-						<input name="{{ input.name }}" type="{{ input.type }}">
+						<div class="input" ng-repeat="input in inputs">
+							
+							<label for="{{ input.name }}">{{ input.label }}</label>
 
-					</div>
+							<input name="{{ input.name }}" type="{{ input.type }}" ng-model="input.value" ng-required="true">
+
+						</div>
+
+						<input class="mdSubmit" type="submit" name="submit" value="Submit">
+
+					</form>
+
+					<button class="mdCancel" ng-click="init()">cancel</button>
+
+					<p class="errorMessage" ng-if="submitted && mdForm.$invalid">Please make sure all fields are filled in with numbers</p>
 
 				</section>
 				
 			</div>
 
 			<div class="col-md-5 col-md-offset-1 resultsWrapper">
+
+				<section class="customerCharges">
+					
+					<h3>Customer Charges</h3>
+
+					<p ng-repeat="subTotal in subTotals">{{ subTotal.name + " " + subTotal.value }}</p>
+
+				</section>
 
 			</div>
 

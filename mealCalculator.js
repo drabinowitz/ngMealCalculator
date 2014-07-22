@@ -12,7 +12,9 @@ angular.module('mealCalculator',[])
 
 	.controller('mdCtrl',function($rootScope,$scope){
 
-		var init = function(){
+		$scope.init = function(){
+
+			$scope.submitted = false;
 
 			$scope.inputs=[
 
@@ -44,6 +46,69 @@ angular.module('mealCalculator',[])
 
 		};
 
-		init();
+		$scope.init();
+
+		$scope.$on('reset',function(){
+
+			init();
+
+		});
+
+		$scope.submit = function(){
+
+			$scope.submitted = true;
+
+			if($scope.mdForm.$valid){
+
+				console.log('Form Submitted: ',$scope.inputs);
+
+				$rootScope.$broadcast('mdSubmit',$scope.inputs);
+
+			} else {
+
+				console.log('form not valid');
+
+			}
+
+		};
+
+	})
+
+	.controller('ccCtrl',function($scope){
+
+		var init = function(){
+
+			$scope.subTotals = [
+
+				{
+
+					name:"Subtotal",
+					value:0.00
+
+				},
+
+				{
+
+					name:"Tip",
+					value:0.00
+
+				},
+
+				{
+
+					name:"Total",
+					value:0.00
+
+				},
+
+			]
+
+		};
+
+		$scope.$on('reset',function(){
+
+			init();
+
+		});
 
 	});
