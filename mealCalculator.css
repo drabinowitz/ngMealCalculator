@@ -1,3 +1,14 @@
 .mealDetails{
 	border: 1px solid black;
+	padding: 10px;
+}
+
+.customerCharges{
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.earningsInfo{
+	border: 1px solid black;
+	padding: 10px;
 }

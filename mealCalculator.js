@@ -16,7 +16,12 @@ angular.module('mealCalculator',[])
 
 			$scope.submitted = false;
 
-			$rootScope.inputs={};
+			$rootScope.inputs={
+
+				taxRate: 8.5,
+				tipPercentage: 17.0
+
+			};
 
 		};
 
@@ -34,9 +39,9 @@ angular.module('mealCalculator',[])
 
 			if($scope.mdForm.$valid){
 
-				console.log('Form Submitted: ',$scope.inputs);
-
 				$rootScope.$broadcast('mdSubmit',$scope.inputs);
+
+				$scope.init();
 
 			} else {
 
@@ -45,5 +50,39 @@ angular.module('mealCalculator',[])
 			}
 
 		};
+
+	})
+
+	.controller('eiCtrl',function($rootScope,$scope){
+
+		var init = function(){
+
+			$scope.earnings={
+
+				tipTotal: 0.00,
+				mealCount: 0,
+				tipAverage: 0.00
+
+			};
+
+		}
+
+		init();
+
+		$scope.$on('reset',function(){
+
+			init();
+
+		});
+
+		$scope.$on('mdSubmit',function(event,inputs){
+
+			$scope.earnings.tipTotal += inputs.basePrice * inputs.tipPercentage / 100;
+
+			$scope.earnings.mealCount++;
+
+			$scope.earnings.tipAverage = $scope.earnings.tipTotal /  $scope.earnings.mealCount;
+
+		})
 
 	});
