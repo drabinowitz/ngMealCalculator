@@ -25,29 +25,37 @@
 
 					<form name="mdForm" novalidate ng-submit="submit()" class="mdForm">
 
-						<div>
-							
-							<label for="basePrice">Base Meal Price: $</label>
+						<div ng-repeat="(name,input) in inputs | orderObjectBy:'index'">
 
-							<input name="basePrice" type="number" ng-model="inputs.basePrice" ng-required="true">
+							<label for="{{ name }}">{{ input.label }}</label>
 
-						</div>
-
-						<div>
-
-							<label for="taxRate">Tax Rate: %</label>
-
-							<input name="taxRate" type="number" ng-model="inputs.taxRate" ng-required="true">
-						
-						</div>
-
-						<div>
-
-							<label for="tipPercentage">Tip Percentage: %</label>
-
-							<input name="tipPercentage" type="number" ng-model="inputs.tipPercentage" ng-required="true">
+							<input name="{{ name }}" type="number" ng-model="input.value" ng-required="true">
 
 						</div>
+
+<!-- 						<div>
+	
+	<label for="basePrice">Base Meal Price: $</label>
+
+	<input name="basePrice" type="number" ng-model="inputs.basePrice" ng-required="true">
+
+</div>
+
+<div>
+
+	<label for="taxRate">Tax Rate: %</label>
+
+	<input name="taxRate" type="number" ng-model="inputs.taxRate" ng-required="true">
+
+</div>
+
+<div>
+
+	<label for="tipPercentage">Tip Percentage: %</label>
+
+	<input name="tipPercentage" type="number" ng-model="inputs.tipPercentage" ng-required="true">
+
+</div> -->
 
 						<input class="mdSubmit" type="submit" name="submit" value="Submit">
 
