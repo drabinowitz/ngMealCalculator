@@ -61,17 +61,17 @@
 				
 			</div>
 
-			<div class="col-md-5 col-md-offset-1 resultsWrapper">
+			<div class="col-md-5 resultsWrapper">
 
-				<section class="customerCharges">
+				<section class="customerCharges" ng-controller="ccCtrl">
 					
 					<h3>Customer Charges</h3>
 
-					<p>SubTotal: {{ ( inputs.basePrice + inputs.basePrice * inputs.taxRate / 100 ) || 0 | currency }}</p>
+					<p>SubTotal: {{ inputs.subTotal || 0 | currency }}</p>
 
-					<p>Tip: {{ ( inputs.basePrice * inputs.tipPercentage / 100 ) || 0 | currency }}</p>
+					<p>Tip: {{ inputs.tip || 0 | currency }}</p>
 
-					<p>Total: {{ ( inputs.basePrice + inputs.basePrice * inputs.taxRate / 100 + inputs.basePrice * inputs.tipPercentage / 100 ) || 0 | currency }}</p>
+					<p>Total: {{ inputs.total || 0 | currency }}</p>
 
 				</section>
 

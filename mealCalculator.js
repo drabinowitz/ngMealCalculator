@@ -16,7 +16,7 @@ angular.module('mealCalculator',[])
 
 			$scope.submitted = false;
 
-			$rootScope.inputs={
+			$scope.inputs={
 
 				taxRate: 8.5,
 				tipPercentage: 17.0
@@ -50,6 +50,28 @@ angular.module('mealCalculator',[])
 			}
 
 		};
+
+		$scope.$watchCollection('inputs',function(newVal,oldVal){
+
+			$rootScope.$broadcast('mdEdit',$scope.inputs);
+
+		});
+
+	})
+
+	.controller('ccCtrl',function($rootScope,$scope){
+
+		$scope.inputs = {};
+
+		$scope.$on('mdEdit',function(event,inputs){
+
+			$scope.inputs.subTotal = inputs.basePrice + inputs.basePrice * inputs.taxRate / 100;
+
+			$scope.inputs.tip = inputs.basePrice * inputs.tipPercentage / 100;
+
+			$scope.inputs.total = $scope.inputs.subTotal + $scope.inputs.tip;
+
+		})
 
 	})
 
