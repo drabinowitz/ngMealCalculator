@@ -23,21 +23,21 @@
 					
 					<h3 class="mdTitle">Enter the Meal Details</h3>
 
-					<form name="mdForm" novalidate ng-submit="submit()">
+					<form name="mdForm" novalidate ng-submit="submit()" class="mdForm">
 
-						<div class="input" ng-repeat="input in inputs">
-							
-							<label for="{{ input.name }}">{{ input.label }}</label>
+						<div ng-repeat="(name,input) in inputs | orderObjectBy:'index'">
 
-							<input name="{{ input.name }}" type="{{ input.type }}" ng-model="input.value" ng-required="true">
+							<label for="{{ name }}">{{ input.label }}</label>
+
+							<input name="{{ name }}" type="number" ng-model="input.value" ng-required="true">
 
 						</div>
 
-						<input class="mdSubmit" type="submit" name="submit" value="Submit">
+						<input class="options mdSubmit" type="submit" name="submit" value="Submit">
 
 					</form>
 
-					<button class="mdCancel" ng-click="init()">cancel</button>
+					<button class="options mdCancel" ng-click="init()">cancel</button>
 
 					<p class="errorMessage" ng-if="submitted && mdForm.$invalid">Please make sure all fields are filled in with numbers</p>
 
@@ -45,14 +45,30 @@
 				
 			</div>
 
-			<div class="col-md-5 col-md-offset-1 resultsWrapper">
+			<div class="col-md-6 resultsWrapper">
 
-				<section class="customerCharges">
+				<section class="customerCharges" ng-controller="ccCtrl">
 					
 					<h3>Customer Charges</h3>
 
-					<p ng-repeat="subTotal in subTotals">{{ subTotal.name + " " + subTotal.value }}</p>
+					<p>SubTotal: {{ inputs.subTotal || 0 | currency }}</p>
 
+					<p>Tip: {{ inputs.tip || 0 | currency }}</p>
+
+					<p>Total: {{ inputs.total || 0 | currency }}</p>
+
+				</section>
+
+				<section class="earningsInfo" ng-controller="eiCtrl">
+
+					<h3>My Earnings Info</h3>
+
+					<p>Tip Total: {{ earnings.tipTotal | currency }}</p>
+
+					<p>Meal Count: {{ earnings.mealCount | number:0 }}</p>
+
+					<p>Average Tip Per Meal: {{ earnings.tipAverage | currency }}</p>
+					
 				</section>
 
 			</div>
@@ -61,7 +77,7 @@
 
 		<div class="row">
 
-			<button ng-click="reset()">Reset</button>
+			<button class="reset" ng-click="reset()">Reset</button>
 
 		</div>
 

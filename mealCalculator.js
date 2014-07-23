@@ -16,33 +16,27 @@ angular.module('mealCalculator',[])
 
 			$scope.submitted = false;
 
-			$scope.inputs=[
+			$scope.inputs={
 
-				{
-				
-					label:"Base Meal Price: $",
-					name:"basePrice",
-					type:"number"
-
+				basePrice:{
+					label: "Base Meal Price: $",
+					value:undefined,
+					index: 1
 				},
 
-				{
-		
+				taxRate:{
 					label:"Tax Rate: %",
-					name:"taxRate",
-					type:"number"
-
+					value:8.5,
+					index: 2
 				},
 
-				{
-				
+				tipPercentage:{
 					label:"Tip Percentage: %",
-					name:"tipPercentage",
-					type:"number"
-
+					value:17.0,
+					index: 3
 				}
 
-			]
+			};
 
 		};
 
@@ -50,7 +44,7 @@ angular.module('mealCalculator',[])
 
 		$scope.$on('reset',function(){
 
-			init();
+			$scope.init();
 
 		});
 
@@ -60,9 +54,9 @@ angular.module('mealCalculator',[])
 
 			if($scope.mdForm.$valid){
 
-				console.log('Form Submitted: ',$scope.inputs);
-
 				$rootScope.$broadcast('mdSubmit',$scope.inputs);
+
+				$scope.init();
 
 			} else {
 
@@ -72,43 +66,86 @@ angular.module('mealCalculator',[])
 
 		};
 
+		$scope.$watch('inputs',function(newVal,oldVal){
+
+			$rootScope.$broadcast('mdEdit',$scope.inputs);
+
+		},true);
+
 	})
 
-	.controller('ccCtrl',function($scope){
+	.controller('ccCtrl',function($rootScope,$scope){
+
+		$scope.inputs = {};
+
+		$scope.$on('mdEdit',function(event,inputs){
+
+			$scope.inputs.subTotal = inputs.basePrice.value + inputs.basePrice.value * inputs.taxRate.value / 100;
+
+			$scope.inputs.tip = inputs.basePrice.value * inputs.tipPercentage.value / 100;
+
+			$scope.inputs.total = $scope.inputs.subTotal + $scope.inputs.tip;
+
+		})
+
+	})
+
+	.controller('eiCtrl',function($rootScope,$scope){
 
 		var init = function(){
 
-			$scope.subTotals = [
+			$scope.earnings={
 
-				{
+				tipTotal: 0.00,
+				mealCount: 0,
+				tipAverage: 0.00
 
-					name:"Subtotal",
-					value:0.00
+			};
 
-				},
+		}
 
-				{
-
-					name:"Tip",
-					value:0.00
-
-				},
-
-				{
-
-					name:"Total",
-					value:0.00
-
-				},
-
-			]
-
-		};
+		init();
 
 		$scope.$on('reset',function(){
 
 			init();
 
 		});
+
+		$scope.$on('mdSubmit',function(event,inputs){
+
+			$scope.earnings.tipTotal += inputs.basePrice.value * inputs.tipPercentage.value / 100;
+
+			$scope.earnings.mealCount++;
+
+			$scope.earnings.tipAverage = $scope.earnings.tipTotal /  $scope.earnings.mealCount;
+
+		})
+
+	})
+
+	.filter('orderObjectBy', function() {
+	  
+	  return function(items, field, reverse) {
+
+	    var filtered = [];
+
+	    angular.forEach(items, function(item) {
+
+	      filtered.push(item);
+	    
+	    });
+	    
+	    filtered.sort(function (a, b) {
+	    
+	      return (a[field] > b[field] ? 1 : -1);
+	    
+	    });
+	    
+	    if(reverse) filtered.reverse();
+	    
+	    return filtered;
+	  
+	  };
 
 	});

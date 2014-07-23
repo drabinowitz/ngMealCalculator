@@ -1,3 +1,29 @@
+.container{
+	border: 1px solid black;
+}
+
 .mealDetails{
 	border: 1px solid black;
+	padding: 10px;
+	overflow: auto;
+}
+
+.options{
+	float: right;
+}
+
+.customerCharges{
+	border: 1px solid black;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+.earningsInfo{
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.reset {
+	float: right;
+	margin: 10px;
 }
