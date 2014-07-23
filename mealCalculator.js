@@ -70,8 +70,6 @@ angular.module('mealCalculator',[])
 
 			$rootScope.$broadcast('mdEdit',$scope.inputs);
 
-			console.log(newVal);
-
 		},true);
 
 	})

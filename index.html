@@ -33,11 +33,11 @@
 
 						</div>
 
-						<input class="mdSubmit" type="submit" name="submit" value="Submit">
+						<input class="options mdSubmit" type="submit" name="submit" value="Submit">
 
 					</form>
 
-					<button class="mdCancel" ng-click="init()">cancel</button>
+					<button class="options mdCancel" ng-click="init()">cancel</button>
 
 					<p class="errorMessage" ng-if="submitted && mdForm.$invalid">Please make sure all fields are filled in with numbers</p>
 
@@ -45,7 +45,7 @@
 				
 			</div>
 
-			<div class="col-md-5 resultsWrapper">
+			<div class="col-md-6 resultsWrapper">
 
 				<section class="customerCharges" ng-controller="ccCtrl">
 					
@@ -77,7 +77,7 @@
 
 		<div class="row">
 
-			<button ng-click="reset()">Reset</button>
+			<button class="reset" ng-click="reset()">Reset</button>
 
 		</div>
 
