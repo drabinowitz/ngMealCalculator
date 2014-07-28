@@ -2,30 +2,8 @@
 	border: 1px solid black;
 }
 
-.mealDetails{
-	border: 1px solid black;
-	padding: 10px;
-	overflow: auto;
-}
-
 .options{
 	float: right;
-}
-
-.customerCharges{
-	border: 1px solid black;
-	padding: 10px;
-	margin-bottom: 30px;
-}
-
-.earningsInfo{
-	border: 1px solid black;
-	padding: 10px;
-}
-
-.reset {
-	float: right;
-	margin: 10px;
 }
 
 .mealViewWrapper {
@@ -75,4 +53,26 @@
 @-webkit-keyframes fadeUp{
 	from{opacity: 1;top:0;}
 	to{opacity: 0;top:-10px;z-index: 99;}
+}
+
+.mealDetails{
+	border: 1px solid black;
+	padding: 10px;
+	overflow: auto;
+}
+
+.customerCharges{
+	border: 1px solid black;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+.earningsInfo{
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.reset {
+	float: right;
+	margin: 10px;
 }
