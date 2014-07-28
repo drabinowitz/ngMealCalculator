@@ -13,98 +13,12 @@ angular.module('mealCalculator',['ui.router']).
 
 		state('newMeal',{
 			url : '/New Meal',
-			templateUrl : 'partials/newMeal.html',
-			controller : function($rootScope,$scope){
-
-				$scope.init = function(){
-
-					$scope.submitted = false;
-
-					$scope.inputs={
-
-						basePrice:{
-							label: "Base Meal Price: $",
-							value:undefined,
-							index: 1
-						},
-
-						taxRate:{
-							label:"Tax Rate: %",
-							value:8.5,
-							index: 2
-						},
-
-						tipPercentage:{
-							label:"Tip Percentage: %",
-							value:17.0,
-							index: 3
-						}
-
-					};
-
-				};
-
-				$scope.init();
-
-				$scope.$on('reset',function(){
-
-					$scope.init();
-
-				});
-
-				$scope.submit = function(){
-
-					$scope.submitted = true;
-
-					if($scope.mdForm.$valid){
-
-						$rootScope.$broadcast('mdSubmit',$scope.inputs);
-
-						console.log('hello');
-
-						$scope.init();
-
-					} else {
-
-						console.log('form not valid');
-
-					}
-
-				};
-
-				$scope.$watch('inputs',function(newVal,oldVal){
-
-					$rootScope.$broadcast('mdEdit',$scope.inputs);
-
-				},true);
-
-			}
+			templateUrl : 'partials/newMeal.html'
 		}).
 
 		state('myEarnings',{
 			url : '/My Earnings',
-			templateUrl : 'partials/myEarnings.html',
-			controller : function($rootScope,$scope){
-
-				var init = function(){
-
-					$rootScope.earnings={
-
-						tipTotal: 0.00,
-						mealCount: 0,
-						tipAverage: 0.00
-
-					};
-
-				}
-
-				$scope.$on('reset',function(){
-
-					init();
-
-				});
-
-			}
+			templateUrl : 'partials/myEarnings.html'
 		});
 
 	}).
@@ -145,7 +59,7 @@ angular.module('mealCalculator',['ui.router']).
 
 	}).
 
-	/*controller('mdCtrl',function($rootScope,$scope){
+	controller('mdCtrl',function($rootScope,$scope){
 
 		$scope.init = function(){
 
@@ -207,7 +121,7 @@ angular.module('mealCalculator',['ui.router']).
 
 		},true);
 
-	}).*/
+	}).
 
 	controller('ccCtrl',function($rootScope,$scope){
 
@@ -225,11 +139,11 @@ angular.module('mealCalculator',['ui.router']).
 
 	}).
 
-	/*controller('eiCtrl',function($rootScope,$scope){
+	controller('eiCtrl',function($rootScope,$scope){
 
 		var init = function(){
 
-			$scope.earnings={
+			$rootScope.earnings={
 
 				tipTotal: 0.00,
 				mealCount: 0,
@@ -239,25 +153,13 @@ angular.module('mealCalculator',['ui.router']).
 
 		}
 
-		init();
-
 		$scope.$on('reset',function(){
 
 			init();
 
 		});
 
-		$scope.$on('mdSubmit',function(event,inputs){
-
-			$scope.earnings.tipTotal += inputs.basePrice.value * inputs.tipPercentage.value / 100;
-
-			$scope.earnings.mealCount++;
-
-			$scope.earnings.tipAverage = $scope.earnings.tipTotal /  $scope.earnings.mealCount;
-
-		})
-
-	}).*/
+	}).
 
 	filter('orderObjectBy', function() {
 	  
