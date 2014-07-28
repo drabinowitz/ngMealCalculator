@@ -1,0 +1,23 @@
+<div class="col-md-6 resultsWrapper">
+
+	<!-- ng-controller="eiCtrl" -->
+
+	<section class="earningsInfo">
+
+		<h3>My Earnings Info</h3>
+
+		<p>Tip Total: {{ earnings.tipTotal | currency }}</p>
+
+		<p>Meal Count: {{ earnings.mealCount | number:0 }}</p>
+
+		<p>Average Tip Per Meal: {{ earnings.tipAverage | currency }}</p>
+		
+	</section>
+
+	<div class="row">
+
+		<button class="reset" ng-click="reset()">Reset</button>
+
+	</div>
+
+</div>

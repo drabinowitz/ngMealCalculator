@@ -1,16 +1,151 @@
-angular.module('mealCalculator',[])
+angular.module('mealCalculator',['ui.router']).
 
-	.controller('rootCtrl',function($rootScope,$scope){
+	config(function($stateProvider,$urlRouterProvider){
+
+		$urlRouterProvider.otherwise("/home");
+
+		$stateProvider.
+
+		state('home',{
+			url : '/home',
+			templateUrl : 'partials/home.html'
+		}).
+
+		state('newMeal',{
+			url : '/New Meal',
+			templateUrl : 'partials/newMeal.html',
+			controller : function($rootScope,$scope){
+
+				$scope.init = function(){
+
+					$scope.submitted = false;
+
+					$scope.inputs={
+
+						basePrice:{
+							label: "Base Meal Price: $",
+							value:undefined,
+							index: 1
+						},
+
+						taxRate:{
+							label:"Tax Rate: %",
+							value:8.5,
+							index: 2
+						},
+
+						tipPercentage:{
+							label:"Tip Percentage: %",
+							value:17.0,
+							index: 3
+						}
+
+					};
+
+				};
+
+				$scope.init();
+
+				$scope.$on('reset',function(){
+
+					$scope.init();
+
+				});
+
+				$scope.submit = function(){
+
+					$scope.submitted = true;
+
+					if($scope.mdForm.$valid){
+
+						$rootScope.$broadcast('mdSubmit',$scope.inputs);
+
+						console.log('hello');
+
+						$scope.init();
+
+					} else {
+
+						console.log('form not valid');
+
+					}
+
+				};
+
+				$scope.$watch('inputs',function(newVal,oldVal){
+
+					$rootScope.$broadcast('mdEdit',$scope.inputs);
+
+				},true);
+
+			}
+		}).
+
+		state('myEarnings',{
+			url : '/My Earnings',
+			templateUrl : 'partials/myEarnings.html',
+			controller : function($rootScope,$scope){
+
+				var init = function(){
+
+					$rootScope.earnings={
+
+						tipTotal: 0.00,
+						mealCount: 0,
+						tipAverage: 0.00
+
+					};
+
+				}
+
+				$scope.$on('reset',function(){
+
+					init();
+
+				});
+
+			}
+		});
+
+	}).
+
+	controller('rootCtrl',function($rootScope,$scope){
+
+		var init = function(){
+
+			$rootScope.earnings={
+
+				tipTotal: 0.00,
+				mealCount: 0,
+				tipAverage: 0.00
+
+			};
+
+		};
+
+		init();
+
+		$scope.$on('mdSubmit',function(event,inputs){
+
+			console.log('caught');
+
+			$rootScope.earnings.tipTotal += inputs.basePrice.value * inputs.tipPercentage.value / 100;
+
+			$rootScope.earnings.mealCount++;
+
+			$rootScope.earnings.tipAverage = $rootScope.earnings.tipTotal /  $rootScope.earnings.mealCount;
+
+		})
 
 		$scope.reset = function(){
 
 			$rootScope.$broadcast('reset');
 
-		}
+		};
 
-	})
+	}).
 
-	.controller('mdCtrl',function($rootScope,$scope){
+	/*controller('mdCtrl',function($rootScope,$scope){
 
 		$scope.init = function(){
 
@@ -72,9 +207,9 @@ angular.module('mealCalculator',[])
 
 		},true);
 
-	})
+	}).*/
 
-	.controller('ccCtrl',function($rootScope,$scope){
+	controller('ccCtrl',function($rootScope,$scope){
 
 		$scope.inputs = {};
 
@@ -88,9 +223,9 @@ angular.module('mealCalculator',[])
 
 		})
 
-	})
+	}).
 
-	.controller('eiCtrl',function($rootScope,$scope){
+	/*controller('eiCtrl',function($rootScope,$scope){
 
 		var init = function(){
 
@@ -122,9 +257,9 @@ angular.module('mealCalculator',[])
 
 		})
 
-	})
+	}).*/
 
-	.filter('orderObjectBy', function() {
+	filter('orderObjectBy', function() {
 	  
 	  return function(items, field, reverse) {
 

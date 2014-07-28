@@ -15,75 +15,21 @@
 
 		<h1 class="title">WaitStaff Calculator</h1>
 
-		<div class="row moduleWrapper">
-				
-			<div class="col-md-6 mealDetailsWrapper">
+		<a ui-sref="home">Home</a>
 
-				<section class="mealDetails" ng-controller="mdCtrl">
-					
-					<h3 class="mdTitle">Enter the Meal Details</h3>
+		<a ui-sref="newMeal">New Meal</a>
 
-					<form name="mdForm" novalidate ng-submit="submit()" class="mdForm">
+		<a ui-sref="myEarnings">My Earnings</a>
 
-						<div ng-repeat="(name,input) in inputs | orderObjectBy:'index'">
-
-							<label for="{{ name }}">{{ input.label }}</label>
-
-							<input name="{{ name }}" type="number" ng-model="input.value" ng-required="true">
-
-						</div>
-
-						<input class="options mdSubmit" type="submit" name="submit" value="Submit">
-
-					</form>
-
-					<button class="options mdCancel" ng-click="init()">cancel</button>
-
-					<p class="errorMessage" ng-if="submitted && mdForm.$invalid">Please make sure all fields are filled in with numbers</p>
-
-				</section>
-				
-			</div>
-
-			<div class="col-md-6 resultsWrapper">
-
-				<section class="customerCharges" ng-controller="ccCtrl">
-					
-					<h3>Customer Charges</h3>
-
-					<p>SubTotal: {{ inputs.subTotal || 0 | currency }}</p>
-
-					<p>Tip: {{ inputs.tip || 0 | currency }}</p>
-
-					<p>Total: {{ inputs.total || 0 | currency }}</p>
-
-				</section>
-
-				<section class="earningsInfo" ng-controller="eiCtrl">
-
-					<h3>My Earnings Info</h3>
-
-					<p>Tip Total: {{ earnings.tipTotal | currency }}</p>
-
-					<p>Meal Count: {{ earnings.mealCount | number:0 }}</p>
-
-					<p>Average Tip Per Meal: {{ earnings.tipAverage | currency }}</p>
-					
-				</section>
-
-			</div>
-
-		</div>
-
-		<div class="row">
-
-			<button class="reset" ng-click="reset()">Reset</button>
-
-		</div>
+		<div class="row" ui-view></div>
 
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.min.js"></script>
+
+	<script type="text/javascript" src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
 
 	<script src="mealCalculator.js"></script>
 
