@@ -1,4 +1,4 @@
-angular.module('mealCalculator',['ui.router']).
+angular.module('mealCalculator',['ui.router','ngAnimate']).
 
 	config(function($stateProvider,$urlRouterProvider){
 

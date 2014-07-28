@@ -21,15 +21,23 @@
 
 		<a ui-sref="myEarnings">My Earnings</a>
 
-		<div class="row" ui-view></div>
+		<div class="row mealViewWrapper">
+
+			<div class="col-md-12 mealViewColumn">
+
+				<div class="mealView" ui-view></div>
+
+			</div>
+
+		</div>
 
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.min.js"></script>
-
 	<script type="text/javascript" src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.min.js"></script>
 
 	<script src="mealCalculator.js"></script>
 
