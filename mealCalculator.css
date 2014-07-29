@@ -25,17 +25,35 @@
 	right: 0;
 }
 
+.mealView.ng-enter,
+.mealView.ng-leave{
+	transition: 1s linear all;
+	-webkit-transition: 1s linear all;
+}
+
 .mealView.ng-enter{
-	animation: 1s focusUp;
-	-webkit-animation: 1s focusUp;
+	opacity: 0;
+	top:10px;
+	z-index: 100;
+}
+
+.mealView.ng-enter-active{
+	opacity: 1;
+	top:0;
 }
 
 .mealView.ng-leave{
-	animation: 1s fadeUp;
-	-webkit-animation: 1s fadeUp;
+	opacity: 1;
+	top:0;
 }
 
-@keyframes focusUp{
+.mealView.ng-leave-active{
+	opacity: 0;
+	top:-10px;
+	z-index: 99;
+}
+
+/*@keyframes focusUp{
 	from{opacity: 0;top:10px;z-index: 100;}
 	to{opacity: 1;top:0;}
 }
@@ -53,7 +71,7 @@
 @-webkit-keyframes fadeUp{
 	from{opacity: 1;top:0;}
 	to{opacity: 0;top:-10px;z-index: 99;}
-}
+}*/
 
 .mealDetails{
 	border: 1px solid black;

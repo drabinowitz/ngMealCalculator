@@ -1,24 +1,23 @@
-angular.module('mealCalculator',['ui.router','ngAnimate']).
+angular.module('mealCalculator',['ngRoute','ngAnimate']).
 
-	config(function($stateProvider,$urlRouterProvider){
+	config(function($routeProvider){
 
-		$urlRouterProvider.otherwise("/home");
+		$routeProvider.
 
-		$stateProvider.
-
-		state('home',{
-			url : '/home',
+		when('/Home',{
 			templateUrl : 'partials/home.html'
 		}).
 
-		state('newMeal',{
-			url : '/New Meal',
+		when('/New Meal',{
 			templateUrl : 'partials/newMeal.html'
 		}).
 
-		state('myEarnings',{
-			url : '/My Earnings',
+		when('/My Earnings',{
 			templateUrl : 'partials/myEarnings.html'
+		}).
+
+		otherwise({
+			redirectTo : '/Home'
 		});
 
 	}).
